@@ -1,0 +1,82 @@
+version: '3.8'
+
+services:
+  qrcode-mcp-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    image: localhost/qrcode-mcp-server:latest
+    container_name: qrcode-mcp-server
+    restart: unless-stopped
+    
+    # Security settings
+    user: "1001:1001"  # Use non-root user
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: '0.5'
+        reservations:
+          memory: 128M
+          cpus: '0.1'
+    
+    # Environment variables
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    
+    # Health check (Note: Podman may ignore HEALTHCHECK in Dockerfile)
+    healthcheck:
+      test: ["CMD", "node", "--version"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    
+    # Logging configuration
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    
+    # For development - mount source code
+    # volumes:
+    #   - ./src:/app/src:ro
+    #   - ./dist:/app/dist
+    
+    # For stdio MCP transport, typically you don't need to expose ports
+    # But keeping it for potential future HTTP transport support
+    # ports:
+    #   - "3000:3000"
+
+# Optional: Add a development service
+  qrcode-mcp-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    container_name: qrcode-mcp-dev
+    volumes:
+      - ./src:/app/src:ro
+      - ./dist:/app/dist
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    command: npm run dev
+    profiles:
+      - dev
+
+# Optional: Network for isolation
+networks:
+  default:
+    name: qrcode-mcp-network
+    driver: bridge
