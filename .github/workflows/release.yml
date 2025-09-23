@@ -76,7 +76,7 @@ jobs:
         git add package.json
         git commit -m "chore: bump version to ${{ steps.version.outputs.version }}"
         git tag ${{ steps.version.outputs.version }}
-        git push origin HEAD:main
+        git push origin HEAD:master
         git push origin ${{ steps.version.outputs.version }}
 
   build-release:
