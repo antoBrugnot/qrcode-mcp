@@ -17,10 +17,10 @@
     "typescript",
     "nodejs"
   ],
-  "author": "Your Name",
+  "author": "Antonin Brugnot",
   "license": "MIT",
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.0.3",
+    "@modelcontextprotocol/sdk": "^1.18.1",
     "qrcode": "^1.5.3",
     "zod": "^3.22.4"
   },
