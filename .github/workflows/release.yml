@@ -62,22 +62,6 @@ jobs:
         npx tsc --noEmit
         npm run build
         
-    - name: Update package.json version
-      run: |
-        VERSION="${{ steps.version.outputs.version }}"
-        CLEAN_VERSION="${VERSION#v}"
-        npm version $CLEAN_VERSION --no-git-tag-version
-        
-    - name: Commit version update
-      if: github.event_name == 'workflow_dispatch'
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add package.json
-        git commit -m "chore: bump version to ${{ steps.version.outputs.version }}"
-        git tag ${{ steps.version.outputs.version }}
-        git push origin HEAD:master
-        git push origin ${{ steps.version.outputs.version }}
 
   build-release:
     name: Build Release Docker Image
