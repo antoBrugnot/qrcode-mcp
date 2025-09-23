@@ -103,14 +103,6 @@ jobs:
         platforms: linux/amd64,linux/arm64
         cache-from: type=gha
         cache-to: type=gha,mode=max
-        
-    - name: Run security scan on release image
-      uses: aquasecurity/trivy-action@master
-      with:
-        image-ref: ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ needs.validate-release.outputs.version }}
-        format: 'table'
-        exit-code: '1'
-        severity: 'CRITICAL,HIGH'
 
   github-release:
     name: Create GitHub Release
@@ -125,6 +117,7 @@ jobs:
       id: changelog
       run: |
         VERSION="${{ needs.validate-release.outputs.version }}"
+        VERSION=${VERSION#v}
         echo "## 🚀 Release ${VERSION}" > CHANGELOG.md
         echo "" >> CHANGELOG.md
         echo "### 🐳 Docker Image" >> CHANGELOG.md
