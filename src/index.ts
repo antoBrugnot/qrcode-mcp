@@ -10,14 +10,17 @@ const server = new McpServer({
   version
 });
 
+// Default margin for QR codes
+const defaultMargin = 4;
+
 // Schema for QR code generation options
 const QRCodeOptionsSchema = z.object({
   errorCorrectionLevel: z.enum(['L', 'M', 'Q', 'H']).optional().default('M'),
   width: z.number().min(50).max(2000).optional(),
-  margin: z.number().min(0).max(10).optional().default(4),
+  margin: z.number().min(0).max(10).optional().default(defaultMargin),
   color: z.object({
-    dark: z.string().optional().default('#000000'),
-    light: z.string().optional().default('#FFFFFF')
+    dark: z.string().optional().default(getDefaultDarkColor()),
+    light: z.string().optional().default(getDefaultLightColor())
   }).optional(),
   type: z.enum(['image/png', 'image/jpeg', 'image/webp']).optional().default('image/png')
 });
@@ -38,10 +41,10 @@ server.registerTool(
       const qrOptions = {
         errorCorrectionLevel: options.errorCorrectionLevel || 'M',
         width: options.width,
-        margin: options.margin || 4,
+        margin: options.margin || defaultMargin,
         color: {
-          dark: options.color?.dark || '#000000',
-          light: options.color?.light || '#FFFFFF'
+          dark: options.color?.dark || getDefaultDarkColor(),
+          light: options.color?.light || getDefaultLightColor()
         }
       };
 
@@ -85,10 +88,10 @@ server.registerTool(
       options: z.object({
         errorCorrectionLevel: z.enum(['L', 'M', 'Q', 'H']).optional().default('M'),
         width: z.number().min(50).max(2000).optional(),
-        margin: z.number().min(0).max(10).optional().default(4),
+        margin: z.number().min(0).max(10).optional().default(defaultMargin),
         color: z.object({
-          dark: z.string().optional().default('#000000'),
-          light: z.string().optional().default('#FFFFFF')
+          dark: z.string().optional().default(getDefaultDarkColor()),
+          light: z.string().optional().default(getDefaultLightColor())
         }).optional()
       }).optional().describe("QR code generation options")
     }
@@ -98,10 +101,10 @@ server.registerTool(
       const qrOptions = {
         errorCorrectionLevel: options.errorCorrectionLevel || 'M',
         width: options.width,
-        margin: options.margin || 4,
+        margin: options.margin || defaultMargin,
         color: {
-          dark: options.color?.dark || '#000000',
-          light: options.color?.light || '#FFFFFF'
+          dark: options.color?.dark || getDefaultDarkColor(),
+          light: options.color?.light || getDefaultLightColor()
         }
       };
 
@@ -200,10 +203,10 @@ server.registerTool(
             const qrOptions = {
               errorCorrectionLevel: options.errorCorrectionLevel || 'M',
               width: options.width,
-              margin: options.margin || 4,
+              margin: options.margin || defaultMargin,
               color: {
-                dark: options.color?.dark || '#000000',
-                light: options.color?.light || '#FFFFFF'
+                dark: options.color?.dark || getDefaultDarkColor(),
+                light: options.color?.light || getDefaultLightColor()
               }
             };
             qrResult = await QRCode.toDataURL(text, qrOptions);
@@ -286,6 +289,14 @@ server.registerTool(
     }
   }
 );
+
+function getDefaultLightColor(): string {
+  return '#FFFFFF';
+}
+
+function getDefaultDarkColor(): string {
+  return '#000000';
+}
 
 // Start the server
 async function main() {
