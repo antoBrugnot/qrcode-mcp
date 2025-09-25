@@ -2,11 +2,12 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import QRCode from "qrcode";
 import { z } from "zod";
+import { version } from "../package.json";
 
 // Create the MCP server
 const server = new McpServer({
   name: "qrcode-generator",
-  version: "1.0.0"
+  version
 });
 
 // Schema for QR code generation options
