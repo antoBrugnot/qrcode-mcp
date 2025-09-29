@@ -4,6 +4,9 @@
 [![Node.js](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.3+-blue.svg)](https://www.typescriptlang.org/)
 [![Docker](https://img.shields.io/badge/Docker-Supported-blue.svg)](https://www.docker.com/)
+[![Podman](https://img.shields.io/badge/Podman-Supported-blue.svg)](https://podman.io/)
+[![Build and Release](https://img.shields.io/badge/Build%20and%20Release-Enabled-blue.svg)](https://github.com/antobrugnot/qrcode-mcp/actions)
+
 [![MCP Badge](https://lobehub.com/badge/mcp-full/antobrugnot-qrcode-mcp)](https://lobehub.com/mcp/antobrugnot-qrcode-mcp)
 
 Un serveur MCP (Model Context Protocol) pour générer des QR codes à partir de texte ou d'URLs en utilisant Node.js et TypeScript.
