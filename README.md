@@ -4,6 +4,7 @@
 [![Node.js](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.3+-blue.svg)](https://www.typescriptlang.org/)
 [![Docker](https://img.shields.io/badge/Docker-Supported-blue.svg)](https://www.docker.com/)
+[![MCP Badge](https://lobehub.com/badge/mcp-full/antobrugnot-qrcode-mcp)](https://lobehub.com/mcp/antobrugnot-qrcode-mcp)
 
 Un serveur MCP (Model Context Protocol) pour générer des QR codes à partir de texte ou d'URLs en utilisant Node.js et TypeScript.
 
@@ -187,7 +188,10 @@ Génère plusieurs QR codes en une seule opération (maximum 10).
 
 ## 🎯 Utilisation avec des clients MCP
 
-### Claude Desktop
+### Claude Desktop (ou Github Copilot)
+
+> ℹ️ **Astuce GitHub Copilot** :  
+> Pour GitHub Copilot, la clé `mcpServers` dans la configuration devient simplement `servers`.
 
 #### Option 1: Avec Docker/Podman (Recommandé)
 
