@@ -11,6 +11,10 @@
 
 Un serveur MCP (Model Context Protocol) pour générer des QR codes à partir de texte ou d'URLs en utilisant Node.js et TypeScript.
 
+<a href="https://glama.ai/mcp/servers/@antoBrugnot/qrcode-mcp">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@antoBrugnot/qrcode-mcp/badge" alt="QR Code Server MCP server" />
+</a>
+
 ## 🚀 Fonctionnalités
 
 - **Génération de QR codes en multiple formats** : DataURL (base64), SVG, et affichage terminal
